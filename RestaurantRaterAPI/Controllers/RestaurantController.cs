@@ -61,7 +61,7 @@ namespace RestaurantRaterAPI.Controllers
             {
                 Restaurant restaurant = await _context.Restaurants.FindAsync(id);
 
-                if(restaurant != null)
+                if (restaurant != null)
                 {
                     restaurant.Name = updatedRestaurant.Name;
                     restaurant.Address = updatedRestaurant.Address;
@@ -96,7 +96,29 @@ namespace RestaurantRaterAPI.Controllers
         }
 
         //GetAllRecommendedRestaurants
-        //[Route]
+        [HttpGet]
+        [Route("api/Restaurant/IsRecommended")]
+        public async Task<IHttpActionResult> GetRestaurantsByIsRecommended()
+        {
+            //List<Restaurant> restaurants = await _context.Restaurants.ToListAsync();
+            //List<Restaurant> recommendedRestaurants = new List<Restaurant>();
+
+            //foreach (Restaurant restaurant in restaurants)
+            //{
+            //    if (restaurant.IsRecommended)
+            //    {
+            //        recommendedRestaurants.Add(restaurant);
+            //    }
+            //}
+            //if (recommendedRestaurants.Count < 1)
+            //{
+            //    return NotFound();
+            //}
+            //return Ok(recommendedRestaurants);
+
+            List<Restaurant> restaurants = _context.Restaurants.ToList().Where(r => r.IsRecommended).ToList();
+            return Ok(restaurants);
+        }
 
     }
 }

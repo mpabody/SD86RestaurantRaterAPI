@@ -33,9 +33,45 @@ namespace RestaurantRaterAPI.Models
             }
         }
 
-        //AverageFoodScore
+
+        //Challenge
+        //Average Food Rating
+        public double FoodRating
+        {
+            get
+            {
+                double totalFoodScore = 0;
+
+                foreach (var rating in Ratings)
+                {
+                    totalFoodScore += rating.FoodScore;
+                }
+                return (Ratings.Count > 0) ? totalFoodScore / Ratings.Count : 0;
+            }
+        }
+
         //AverageEnvironmentScore
-        //AverageCleanlinessScore
+        public double EnvironmentRating
+        {
+            get
+            {
+                IEnumerable<double> scores = Ratings.Select(rating => rating.EnvironmentScore);
+
+                double totalEnviornmentScore = scores.Sum();
+
+                return (Ratings.Count > 0) ? totalEnviornmentScore / Ratings.Count() : 0;
+            }
+        }
+
+        //Average Cleanliness Rating
+        public double CleanlinessScore
+        {
+            get
+            {
+                var totalScore = Ratings.Select(r => r.CleanlinessScore).Sum();
+                return (Ratings.Count > 0) ? totalScore / Ratings.Count : 0;
+            }
+        }
 
         public bool IsRecommended => Rating > 8.5;
     }
