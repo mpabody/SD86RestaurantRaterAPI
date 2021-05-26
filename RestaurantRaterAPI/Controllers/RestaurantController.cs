@@ -95,5 +95,8 @@ namespace RestaurantRaterAPI.Controllers
             return InternalServerError();
         }
 
+        //GetAllRecommendedRestaurants
+        //[Route]
+
     }
 }
